@@ -1,0 +1,27 @@
+{
+    "name": "Service",
+    "description": "Registers the \"service\" post type (dịch vụ kèm chi phí) into the shared e-commerce flow (cart, checkout, payment, order) provided by the base-ecommerce extension.",
+    "version": "1.0.0",
+    "author": "Jankx",
+    "extension_id": "service",
+    "caller": {
+        "file": "ServiceExtension.php",
+        "class": "Jankx\\Extensions\\Service\\ServiceExtension"
+    },
+    "requirements": {
+        "php": ">=7.4",
+        "extensions": {
+            "base-ecommerce": "*"
+        }
+    },
+    "dependencies": {
+        "extensions": ["base-ecommerce"]
+    },
+    "context": [
+        "frontend",
+        "admin",
+        "ajax",
+        "rest"
+    ],
+    "auto_activate": true
+}

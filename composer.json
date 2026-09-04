@@ -1,0 +1,22 @@
+{
+    "name": "jankx/service-extension",
+    "description": "Registers the \"service\" post type (dịch vụ kèm chi phí) into the shared Jankx e-commerce flow (cart, checkout, payment, order).",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Jankx\\Extensions\\Service\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jankx",
+            "email": "dev@jankx.dev"
+        }
+    ],
+    "require": {
+        "jankx/base-ecommerce-extension": "*"
+    },
+    "config": {
+        "vendor-dir": "libs"
+    }
+}
