@@ -47,7 +47,7 @@ class ServicePostType
             'labels'        => $labels,
             'public'        => true,
             'show_in_rest'  => true,
-            'menu_icon'     => 'dashicons-services',
+            'menu_icon'     => 'dashicons-hammer',
             'menu_position' => 22,
             'supports'      => ['title', 'editor', 'excerpt', 'thumbnail', 'custom-fields'],
             'has_archive'   => 'dich-vu',
