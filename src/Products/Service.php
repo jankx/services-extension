@@ -4,45 +4,14 @@ namespace Jankx\Extensions\Service\Products;
 use Jankx\Extensions\Ecommerce\Abstracts\AbstractProduct;
 use Jankx\Extensions\Service\PostTypes\ServicePostType;
 
-/**
- * Concrete product for the "service" post type.
- *
- * Costs (chi phí) are read from post meta:
- *   _service_price         — selling price (chi phí dịch vụ)
- *   _service_regular_price — optional regular (compare-at) price
- *   _service_sale_price    — optional sale price
- *   _manage_stock          — whether stock is managed
- *   _stock_quantity        — available stock
- *
- * @package Jankx\Extensions\Service
- */
 class Service extends AbstractProduct
 {
-    public function getPrice(): float
-    {
-        $sale  = $this->getSalePrice();
-        $price = (float) get_post_meta($this->id, '_service_price', true);
-
-        return $sale > 0 ? $sale : $price;
-    }
-
-    public function getRegularPrice(): float
-    {
-        return (float) get_post_meta($this->id, '_service_regular_price', true);
-    }
-
-    public function getSalePrice(): float
-    {
-        return (float) get_post_meta($this->id, '_service_sale_price', true);
-    }
-
-    public function isPurchasable(): bool
-    {
-        return $this->post
-            && $this->post->post_status === 'publish'
-            && $this->getPrice() > 0
-            && $this->isInStock();
-    }
+    const PRICE_META_KEY            = '_jankx_price';
+    const REGULAR_PRICE_META_KEY    = '_jankx_regular_price';
+    const SALE_PRICE_META_KEY       = '_jankx_sale_price';
+    const LEGACY_PRICE_META_KEYS    = ['_service_price'];
+    const LEGACY_REGULAR_PRICE_META_KEYS = ['_service_regular_price'];
+    const LEGACY_SALE_PRICE_META_KEYS    = ['_service_sale_price'];
 
     public function isInStock(): bool
     {
@@ -54,9 +23,7 @@ class Service extends AbstractProduct
             return true;
         }
 
-        $stock = (int) get_post_meta($this->id, '_stock_quantity', true);
-
-        return $stock > 0;
+        return (int) get_post_meta($this->id, '_stock_quantity', true) > 0;
     }
 
     public function getProductType(): string
