@@ -83,5 +83,20 @@ class ServiceExtension extends AbstractExtension
                 $registry->register(ServicePostType::POST_TYPE, Service::class);
             });
         }
+
+        // Register coupon scope support
+        add_filter('jankx/coupon/product_scope/post_types', function ($types) {
+            $types[] = [
+                'label'     => __('Dịch vụ', 'jankx'),
+                'rest_base' => 'service',
+                'post_type' => ServicePostType::POST_TYPE,
+            ];
+            return $types;
+        });
+
+        add_filter('jankx/coupon/product_type_scope/post_types', function ($options) {
+            $options[] = ['value' => ServicePostType::POST_TYPE, 'label' => __('Dịch vụ', 'jankx')];
+            return $options;
+        });
     }
 }
