@@ -98,5 +98,32 @@ class ServiceExtension extends AbstractExtension
             $options[] = ['value' => ServicePostType::POST_TYPE, 'label' => __('Dịch vụ', 'jankx')];
             return $options;
         });
+
+        // Register star rating data source for service posts.
+        add_action('init', [$this, 'register_star_rating_provider'], 20);
+    }
+
+    public function register_star_rating_provider(): void
+    {
+        if (!class_exists('\Jankx\Gutenberg\StarRating\StarRatingRegistry')) {
+            return;
+        }
+
+        \Jankx\Gutenberg\StarRating\StarRatingRegistry::register(
+            new \Jankx\Gutenberg\StarRating\Providers\ConfigurableRatingProvider([
+                'id'             => 'service_rating',
+                'label'          => __('Service Rating', 'jankx'),
+                'postTypes'      => ['service'],
+                'ratingMetaKey'  => 'jankx_rating_average',
+                'countMetaKey'   => 'jankx_rating_count',
+                'editorControls' => [
+                    [
+                        'type'      => 'toggle',
+                        'attribute' => 'showCount',
+                        'label'     => __('Show review count', 'jankx'),
+                    ],
+                ],
+            ])
+        );
     }
 }
