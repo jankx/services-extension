@@ -64,6 +64,11 @@ class ServiceExtension extends AbstractExtension
         // Register the service post type on every request.
         (new ServicePostType())->register();
 
+        // Enable reviews for the service post type via the review-system API.
+        if (class_exists(\Jankx\Extensions\ReviewSystem\ReviewSystemExtension::class)) {
+            \Jankx\Extensions\ReviewSystem\ReviewSystemExtension::support_post_type(ServicePostType::POST_TYPE);
+        }
+
         // Register service category taxonomy (+ destination when available).
         (new ServiceCategoryTaxonomy())->register();
 
