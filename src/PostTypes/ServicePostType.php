@@ -49,7 +49,7 @@ class ServicePostType
             'show_in_rest'  => true,
             'menu_icon'     => 'dashicons-hammer',
             'menu_position' => 22,
-            'supports'      => ['title', 'editor', 'excerpt', 'thumbnail', 'custom-fields'],
+            'supports'      => ['title', 'editor', 'excerpt', 'thumbnail'],
             'has_archive'   => 'dich-vu',
             'rewrite'       => ['slug' => 'dich-vu', 'with_front' => false],
             'show_in_menu'  => true,
